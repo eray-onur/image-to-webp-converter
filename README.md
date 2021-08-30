@@ -1,5 +1,12 @@
 # Image to .WEBP Converter
-Simple file conversion program which converts files with .png extension into .webp, which is far more optimized to work as network images.
+Simple file conversion program which converts images into .webp format, which is far more optimized to work as network images.
+
+## Supported Extensions
+
+* PNG
+* JPG
+* JPEG
+* GIF
 
 ## How does it work?
 
@@ -12,4 +19,3 @@ Running the command `npm run start` does the trick. It's also possible to deploy
 ## Planned features:
 
 * HTTP/HTTPS Service feature,
-* More image extension support.
