@@ -11,9 +11,6 @@ const pump = util.promisify(pipeline);
 
 const fs = require('fs');
 
-const assetDir = './assets/unoptimized';
-const optimizedAssetsDir = `${assetDir}/optimized`;
-
 // fastify initialization
 const fastify = require('fastify')({
     logger: true
@@ -34,15 +31,15 @@ fastify.get('/*', async(request, reply) => {
     let file;
     try {
         if(extension === '.webp') {
-            console.log(`${optimizedAssetsDir}/${url}`);
-            file = await fs.promises.readFile(`${optimizedAssetsDir}/${url}`);
+            console.log(`${process.env.OPTIMIZED_ASSETS_PATH}/${url}`);
+            file = await fs.promises.readFile(`${process.env.OPTIMIZED_ASSETS_PATH}/${url}`);
             return file;
         } else {
-            file = await fs.promises.readFile(`${assetDir}/${url}`);
+            file = await fs.promises.readFile(`${process.env.UNOPTIMIZED_ASSETS_PATH}/${url}`);
             if(file) {
                 // Convert the image asset to .webp format for further optimization.
-                ffmpeg().input(`${assetDir}/${url}`).saveToFile(`${optimizedAssetsDir}/${fileName}.webp`);
-                const optimizedFile = await fs.promises.readFile(`${optimizedAssetsDir}/${fileName}.webp`);
+                ffmpeg().input(`${process.env.UNOPTIMIZED_ASSETS_PATH}/${url}`).saveToFile(`${process.env.OPTIMIZED_ASSETS_PATH}/${fileName}.webp`);
+                const optimizedFile = await fs.promises.readFile(`${process.env.OPTIMIZED_ASSETS_PATH}/${fileName}.webp`);
                 return (optimizedFile) ? optimizedFile : file;
             }
         }
