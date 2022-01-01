@@ -1,6 +1,8 @@
 # Image to .WEBP Converter
 Simple file conversion program which converts images into .webp format, which is far more optimized to work as network images.
 
+P.S: .env file must contain these variables, otherwise conversion won't be stored: OPTIMIZED_ASSETS_PATH, UNOPTIMIZED_ASSETS_PATH
+
 ## Supported Extensions
 
 * PNG
